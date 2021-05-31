@@ -1,0 +1,88 @@
+
+<div class="card mb-3" *ngFor="let hotel of AllHotels ; let i =index"style="max-width: 70%;margin-left: 15%;margin-top: 7%;background-color:#F8F8FF	;">
+    <div class="row g-0">
+      <div class="col-md-4">
+        <img src="{{hotel.ThumbImage[0].url}}" style="max-width: 100%; max-height: 12em !important;">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title" style="font-weight:500">{{hotel?.Title}}</h5>
+          <h6 class="card-title" style="font-size: 14px">{{hotel?.Address}}</h6>
+          <p class="card-text">{{hotel?.localisation}}</p>
+          <p class="card-text"style="color:green;font-size: 14px;">{{hotel?.Summary}}/ {{hotel?.PromotionTitle[0]}} offre à partir du {{hotel?.PromotionDateTime}}</p>
+        </div>
+        <div class="card-body" style="text-align: right;margin-right: 10%;" >
+          <div>
+            <h4 class="card-text"><small> TND</small></h4>
+           </div>
+              <button type="button" style="max-width: 9em;max-height: 2em" class="btn btn-success" (click)="isCollapsed[i] = !isCollapsed[i]">
+                <small style="font-size: 3mm;text-justify: auto;">CHAMBRES ET TARIFS</small>
+            </button>
+
+        </div>
+      </div>
+    </div>  
+
+
+    <!-- Collapse -->
+    <div [ngbCollapse]="!isCollapsed[i]" style="max-width: 100%;">
+      <div class="card-header" >
+        <ul class="list-group list-group-horizontal" style="justify-content: space-between;">
+          <li class="list-group-item" style="border: 0px !important; background:none;color:#191970;font-weight:500">Type de chambres</li>
+          <li class="list-group-item"style="border: 0px !important; background:none;color: #191970;font-weight:500">Occupation</li>
+          <li class="list-group-item"style="border: 0px !important; background:none;color: #191970;font-weight:500">Type de pension</li>
+          <li class="list-group-item"style="border: 0px !important; background:none;color: #191970;font-weight:500">Total de nuits</li>
+        </ul>
+      </div>
+    
+      <div class="card card-body" style="max-width: 100%;background-color:#F8F8FF">
+
+        <ul id="{{i}}" class="list-group list-group-horizontal" style="justify-content: space-between;">
+          <li class="list-group-item" style="border: 0px !important; background:none;">
+            <div *ngFor= "let item of hotel.rooms[0].room ">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="{{item.count}}" id="flexCheckDefault">
+              <label class="form-check-label" for="flexCheckDefault">{{item.count}}x{{item.Title}} 
+                <span class="badge bg-warning text-dark">{{item.Boardings[0].Boarding[0].Available[0]._}}</span><br>
+                <p style="color: green;">Annulation Gratuite Avant le {{item.Boardings[0].Boarding[0].CancellationPolicy[0].FromDate}}</p>
+              </label>
+            </div>
+          </div>
+          </li>
+          <li class="list-group-item"style="border: 0px !important; background:none;"><mat-icon>wc</mat-icon>
+
+          </li>
+
+          <li class="list-group-item"style="border: 0px !important; background:none;">
+            <div >
+
+            <select  *ngFor= "let item of hotel.rooms[0].room ;"  class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" (change)="radioChangeHandler($event,i)">
+            <option  *ngFor= "let element of item.Boardings[0].Boarding"  value="{{element.Title}}">{{element.Title}}</option>
+
+          </select>
+        </div>
+      </li>
+          <li class="list-group-item"style="border: 0px !important; background:none; "><strong> TND</strong><br><p style="color: green;">Frais d'annulation</p></li>
+        </ul>
+      
+        
+
+
+      </div>
+      <!-- collapse footer: -->
+      <div class="card-footer" style="max-width: 100%;">
+        <div style=" display:flex;padding-left: 50%;justify-content: space-between;">
+        <p style="font-weight:500">Montant Total Du Séjour :</p>
+        <button type="button " class="btn btn-warning pull-right">Réserver</button>
+
+      </div>
+      </div>
+      
+    
+      
+    </div>
+       
+
+  </div>
+
+  
