@@ -14,11 +14,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { AllHotelsComponent } from './all-hotels/all-hotels.component';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { SearchFilterPipe } from './search-filter.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AllHotelsComponent
+    AllHotelsComponent,
+    SearchFilterPipe
   ],
   imports: [
     BrowserModule,
